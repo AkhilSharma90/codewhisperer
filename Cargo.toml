@@ -1,0 +1,46 @@
+[package]
+name = "codewhisperer"
+version = "1.0.0"
+authors = ["Akhil Sharma <akhil.sharma@myrl.tech>"]
+description = "A command-line (CLI) tool to generate an LLM prompt from codebases of any size, fast."
+keywords = ["code", "prompt", "llm", "gpt", "ai"]
+categories = ["command-line-utilities", "development-tools"]
+homepage = "https://github.com/akhilsharma90/codewhisperer"
+documentation = "https://github.com/akhilsharma90/codewhisperer"
+repository = "https://github.com/akhilsharma90/codewhisperer"
+license = "MIT"
+readme = "README.md"
+exclude = [".github/*", ".assets/*"]
+edition = "2021"
+
+[[bin]]
+name = "codewhisperer"
+test = false
+bench = false
+
+[dependencies]
+clap = { version = "4.0", features = ["derive"] }
+handlebars = "4.3"
+jwalk = "0.8"
+termtree = "0.4"
+cli-clipboard = "0.4"
+serde_json = "1.0.114"
+indicatif = "0.17.8"
+colored = "2.1.0"
+tiktoken-rs = "0.5.8"
+ignore = "0.4.22"
+anyhow = "1.0.80"
+inquire = "0.7.1"
+regex = "1.10.3"
+git2 = "0.18.2"
+
+[profile.release]
+lto = "thin"
+panic = 'abort'
+codegen-units = 1
+
+[package.metadata.deb]
+section = "utility"
+assets = [
+    ["target/release/codewhisperer", "/usr/bin/", "755"],
+]
